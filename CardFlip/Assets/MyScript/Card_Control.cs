@@ -1,18 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Card_Control : MonoBehaviour
 {
-    public int cardNumberOfSingleline; // ÇÑ ÁÙÀÇ Ä«µå °³¼ö
+    public int cardNumberOfSingleline; // í•œ ì¤„ì˜ ì¹´ë“œ ê°œìˆ˜
     public int horizontalSpacing;
     public int verticalSpacing;
-    public int indexSpriteBePrinted; // °¢ Ä«µå¿¡ Ãâ·ÂÇÒ Sprite ÀÎµ¦½º
-    public Vector3 centerPos; // 2Â÷¿ø Ä«µå¸¦ Ãâ·ÂÇÒ Áß½É ÁÂÇ¥
-    public GameObject basic_Card; // Ä«µå prefab
-    public List<List<GameObject>> Cards; // °¢ Ä«µåÀÇ object 2Â÷¿ø ¸®½ºÆ®
-    public List<Sprite> cardSprites; // ÀüÃ¼ Sprite ¸®½ºÆ®, À¯´ÏÆ¼ Ã¢¿¡¼­ ÃÊ±âÈ­
-    public List<KeyValuePair<int, Sprite>> usingCardSprites; // °ÔÀÓ¿¡¼­ »ç¿ëÇÒ spriteÀÇ ¸®½ºÆ®
+    public int indexSpriteBePrinted; // ê° ì¹´ë“œì— ì¶œë ¥í•  Sprite ì¸ë±ìŠ¤
+    public Vector3 centerPos; // 2ì°¨ì› ì¹´ë“œë¥¼ ì¶œë ¥í•  ì¤‘ì‹¬ ì¢Œí‘œ
+    public GameObject basic_Card; // ì¹´ë“œ prefab
+    public List<List<GameObject>> Cards; // ê° ì¹´ë“œì˜ object 2ì°¨ì› ë¦¬ìŠ¤íŠ¸
+    public List<Sprite> cardSprites; // ì „ì²´ Sprite ë¦¬ìŠ¤íŠ¸, ìœ ë‹ˆí‹° ì°½ì—ì„œ ì´ˆê¸°í™”
+    public List<KeyValuePair<int, Sprite>> usingCardSprites; // ê²Œì„ì—ì„œ ì‚¬ìš©í•  spriteì˜ ë¦¬ìŠ¤íŠ¸
     //public GameObject card_Flip; // cardFlip Script
     void Start()
     {
@@ -23,10 +23,10 @@ public class Card_Control : MonoBehaviour
         centerPos = new Vector3(35, 13, 0);
         Cards = new List<List<GameObject>>();
 
-        // ÀüÃ¼ Sprite¿¡¼­ »ç¿ëÇÒ Sprite¸¦ usingCardSprites¿¡ ÀúÀå
+        // ì „ì²´ Spriteì—ì„œ ì‚¬ìš©í•  Spriteë¥¼ usingCardSpritesì— ì €ì¥
         usingCardSprites = getUsingCards(cardSprites);
 
-        // Cards ÃÊ±âÈ­
+        // Cards ì´ˆê¸°í™”
         for (int i = 0; i < cardNumberOfSingleline; i++)
         {
             List<GameObject> templist = new List<GameObject>();
@@ -37,13 +37,13 @@ public class Card_Control : MonoBehaviour
             Cards.Add(templist);
         }
 
-        // Ä«µå »ı¼º ÈÄ Cards¿¡ ÀúÀå
-        // Cards ½ºÅ©¸³Æ® °¢ Ä«µå¿¡ ¿¬°á
+        // ì¹´ë“œ ìƒì„± í›„ Cardsì— ì €ì¥
+        // Cards ìŠ¤í¬ë¦½íŠ¸ ê° ì¹´ë“œì— ì—°ê²°
         for (int i = 0; i < cardNumberOfSingleline; i++)
         {
             for (int j = 0; j < cardNumberOfSingleline; j++)
             {
-                //////»ç½Ç Â¦¼ö*Â¦¼öÀÇ ÇüÅÂ¿©¼­ Á¤ °¡¿îµ¥¿¡´Â Ä«µå°¡ ¾øÀ½ thisCardPos´Â ´Ù½Ã ¼³Á¤ÇØ¾ßÇÔ
+                //////ì‚¬ì‹¤ ì§ìˆ˜*ì§ìˆ˜ì˜ í˜•íƒœì—¬ì„œ ì • ê°€ìš´ë°ì—ëŠ” ì¹´ë“œê°€ ì—†ìŒ thisCardPosëŠ” ë‹¤ì‹œ ì„¤ì •í•´ì•¼í•¨
                 //Debug.Log(iter++);
                 Vector3 thisCardPos = centerPos + new Vector3((j - 2) * horizontalSpacing, (i - 2) * verticalSpacing, 0);
                 Cards[i][j] = Instantiate(basic_Card, thisCardPos, Quaternion.identity);
@@ -60,12 +60,12 @@ public class Card_Control : MonoBehaviour
     }
 
     /*
-     * ÀüÃ¼ Ä«µå Sprite¿¡¼­ ÇÊ¿äÇÑ Ä«µå Sprite¸¦ randomÀ¸·Î ¼±ÅÃÇÕ´Ï´Ù.
-     *  100°³ÀÇ Sprite°¡ Á¸ÀçÇÏ°í, 6*6ÀÇ Ä«µå¸¦ ¼±ÅÃÇÒ¶§ ´ÙÀ½ÀÇ °úÁ¤¿¡ µû¶ó Ä«µå¸¦ ¼±ÅÃÇÕ´Ï´Ù.
-     *  1. 100°³ÀÇ Sprite¸¦ ¹«ÀÛÀ§·Î ¼¯½À´Ï´Ù.
-     *  2. 0~35ÀÇ ÀÎµ¦½º¸¦ Á¦¿ÜÇÑ ³ª¸ÓÁö Sprite¸¦ Á¦°ÅÇÕ´Ï´Ù.
-     *  3. 0~35ÀÇ Sprite¸¦ ÀÎµ¦½º¿Í ÇÔ²² 1½ÖÀ» ´õ »ı¼ºÇÏ¿© Pair List·Î ÀúÀåÇÕ´Ï´Ù.
-     *  4. Pair¸¦ ·£´ıÇÑ ¼ø¼­·Î ¹Ù²ÛµÚ pair List¸¦ ¹İÈ¯ÇÕ´Ï´Ù.
+     * ì „ì²´ ì¹´ë“œ Spriteì—ì„œ í•„ìš”í•œ ì¹´ë“œ Spriteë¥¼ randomìœ¼ë¡œ ì„ íƒí•©ë‹ˆë‹¤.
+     *  100ê°œì˜ Spriteê°€ ì¡´ì¬í•˜ê³ , 6*6ì˜ ì¹´ë“œë¥¼ ì„ íƒí• ë•Œ ë‹¤ìŒì˜ ê³¼ì •ì— ë”°ë¼ ì¹´ë“œë¥¼ ì„ íƒí•©ë‹ˆë‹¤.
+     *  1. 100ê°œì˜ Spriteë¥¼ ë¬´ì‘ìœ„ë¡œ ì„ìŠµë‹ˆë‹¤.
+     *  2. 0~35ì˜ ì¸ë±ìŠ¤ë¥¼ ì œì™¸í•œ ë‚˜ë¨¸ì§€ Spriteë¥¼ ì œê±°í•©ë‹ˆë‹¤.
+     *  3. 0~35ì˜ Spriteë¥¼ ì¸ë±ìŠ¤ì™€ í•¨ê»˜ 1ìŒì„ ë” ìƒì„±í•˜ì—¬ Pair Listë¡œ ì €ì¥í•©ë‹ˆë‹¤.
+     *  4. Pairë¥¼ ëœë¤í•œ ìˆœì„œë¡œ ë°”ê¾¼ë’¤ pair Listë¥¼ ë°˜í™˜í•©ë‹ˆë‹¤.
     */
     List<KeyValuePair<int, Sprite>> getUsingCards(List<Sprite> ls)
     {
@@ -81,16 +81,16 @@ public class Card_Control : MonoBehaviour
             ls[rnd] = temp;
         }
 
-        // ÇÊ¿äÇÑ ½ÖÀÇ °³¼ö¸¦ Á¦¿ÜÇÑ sprite Á¦°Å
+        // í•„ìš”í•œ ìŒì˜ ê°œìˆ˜ë¥¼ ì œì™¸í•œ sprite ì œê±°
         ls.RemoveRange(0, ls.Count - ((cardNumberOfSingleline * cardNumberOfSingleline) / 2));
 
-        // °°Àº Sprite¸¦ 2°³¾¿ »ı¼º
+        // ê°™ì€ Spriteë¥¼ 2ê°œì”© ìƒì„±
         for(int i = 0; i < ls.Count; i++)
         {
             result.Add(new KeyValuePair<int, Sprite>(i, ls[i]));
             result.Add(new KeyValuePair<int, Sprite>(i, ls[i]));
         }
-        // ÀÎµ¦½º¿Í Sprite½ÖÀ» ·£´ıÇÏ°Ô ¹è¿­
+        // ì¸ë±ìŠ¤ì™€ SpriteìŒì„ ëœë¤í•˜ê²Œ ë°°ì—´
         for (int i = result.Count - 1; i > 0; i--)
         {
             int rnd = UnityEngine.Random.Range(0, i);
@@ -106,10 +106,7 @@ public class Card_Control : MonoBehaviour
     public void report(int spriteIndex, GameObject go)
     {
         CardFlip cf = go.GetComponent<CardFlip>();
-        // Ä«µå 180µµ È¸Àü
-
-
-        //if ÀÌ¹Ì ¿ÀÇÂµÇ¾î ÀÖ´Â Ä«µå¶ó¸é, ÇØ´ç ÀÔ·Â ¹«½Ã
+        //if ì´ë¯¸ ì˜¤í”ˆë˜ì–´ ìˆëŠ” ì¹´ë“œë¼ë©´, í•´ë‹¹ ì…ë ¥ ë¬´ì‹œ
         if (cf.isCardFaceFront)
         {
             return;
@@ -119,17 +116,17 @@ public class Card_Control : MonoBehaviour
             cf.flipCard();
         }
         
-        //if Ã¹¹øÂ° openÀÌ¸é ÇØ´ç ÀÎµ¦½º ¹øÈ£¸¦ Ã¹¹øÂ° openÀ¸·Î ÀúÀå
+        //if ì²«ë²ˆì§¸ openì´ë©´ í•´ë‹¹ ì¸ë±ìŠ¤ ë²ˆí˜¸ë¥¼ ì²«ë²ˆì§¸ openìœ¼ë¡œ ì €ì¥
         
-        //if µÎ¹øÂ° openÀÌ¸é Ã¹¹øÂ° open Ä«µå¿Í ÇöÀç Ä«µå ±×¸²À» ºñ±³
+        //if ë‘ë²ˆì§¸ openì´ë©´ ì²«ë²ˆì§¸ open ì¹´ë“œì™€ í˜„ì¬ ì¹´ë“œ ê·¸ë¦¼ì„ ë¹„êµ
 
-            //if ´Ù¸¥ ±×¸²ÀÌ¸é ÇöÀç Ä«µå ¿ÀÇÂ ÇÏ°í 0.5ÃÊ ´ë±â ÈÄ Ã¹¹øÂ°, µÎ¹øÂ° Ä«µå ¸ğµÎ close
+            //if ë‹¤ë¥¸ ê·¸ë¦¼ì´ë©´ í˜„ì¬ ì¹´ë“œ ì˜¤í”ˆ í•˜ê³  0.5ì´ˆ ëŒ€ê¸° í›„ ì²«ë²ˆì§¸, ë‘ë²ˆì§¸ ì¹´ë“œ ëª¨ë‘ close
 
-            //if °°Àº ±×¸²ÀÌ¸é ÇöÀç Ä«µå open && ¸ÂÃáÄ«µå ¼ıÀÚ += 2
+            //if ê°™ì€ ê·¸ë¦¼ì´ë©´ í˜„ì¬ ì¹´ë“œ open && ë§ì¶˜ì¹´ë“œ ìˆ«ì += 2
 
-                //if ¸ÂÃá Ä«µå ¼ıÀÚ°¡ ÀüÃ¼ Ä«µå¼ö¿Í °°´Ù¸é °ÔÀÓ Á¾·á
+                //if ë§ì¶˜ ì¹´ë“œ ìˆ«ìê°€ ì „ì²´ ì¹´ë“œìˆ˜ì™€ ê°™ë‹¤ë©´ ê²Œì„ ì¢…ë£Œ
 
-                //if ¸ÂÃá Ä«µå ¼ıÀÚ¿Í ÀüÃ¼ Ä«µå¼ö°¡ ´Ù¸£´Ù¸é ¾Æ¹« µ¿ÀÛ ¾ÈÇÔ
+                //if ë§ì¶˜ ì¹´ë“œ ìˆ«ìì™€ ì „ì²´ ì¹´ë“œìˆ˜ê°€ ë‹¤ë¥´ë‹¤ë©´ ì•„ë¬´ ë™ì‘ ì•ˆí•¨
 
 
         return;

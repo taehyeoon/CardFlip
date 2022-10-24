@@ -1,15 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CardFlip : MonoBehaviour
 {
-    public bool isFliping;
-    public bool isCardFaceFront;
-    public bool isFirstOpen;
-    public int spriteIndex;
-    public float timeCount;
-    public float cardFlipSpeed;
+    public bool isFliping; // ì¹´ë“œê°€ íšŒì „í•˜ê³  ìˆì„ ë•Œ true
+    public bool isCardFaceFront; // ì¹´ë“œê°€ ì•ë©´ì¼ ë•Œ true
+    public bool isFirstOpen; // ì„ íƒëœ ì¹´ë“œê°€ ì²«ë²ˆì§¸ openì¼ ë•Œ true
+    public bool letItSpin; // tureê°€ ë˜ëŠ” ìˆœê°„ë¶€í„° 180ë„ íšŒì „ ì‹œì‘
+    public int spriteIndex; // ì˜¤ë¸Œì íŠ¸ì— ì ìš©ëœ ìŠ¤í”„ë¼ì´íŠ¸ì˜ ì¸ë±ìŠ¤
+    public float timeCount; // íšŒì „ë˜ëŠ” ì‹œê°„ ì¹´ìš´íŠ¸
+    public float cardFlipSpeed; // ì¹´ë“œ íšŒì „ ì†ë„
     public Vector3 initialAngle;
     public GameObject target;
     public Card_Control card_Control;
@@ -23,7 +24,7 @@ public class CardFlip : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GameObject tempTarget;
-            // Å¬¸¯ÇÑ °÷ÀÌ ºó°÷ÀÌ ¾Æ´Ô && ¼±ÅÃÇÑ °´Ã¼°¡ gameObject && È¸ÀüÁßÀÌ ¾Æ´Ò ¶§
+            // í´ë¦­í•œ ê³³ì´ ë¹ˆê³³ì´ ì•„ë‹˜ && ì„ íƒí•œ ê°ì²´ê°€ gameObject && íšŒì „ì¤‘ì´ ì•„ë‹ ë•Œ
             if ((tempTarget = GetClickedObject()) != null && tempTarget.Equals(gameObject) && !isFliping)
             {
                 target = tempTarget;
@@ -31,11 +32,10 @@ public class CardFlip : MonoBehaviour
                 card_Control.report(spriteIndex, gameObject);
             }
         }
-        /*
-        if (target != null)
+        
+        if (letItSpin)
         {
-//            Debug.Log("shot");
-            if (timeCount <= 1 )
+            if (timeCount <= 1)
             {
                 target.transform.rotation = Quaternion.Lerp(Quaternion.Euler(new Vector3(initialAngle.x, initialAngle.y, initialAngle.z)), 
                     Quaternion.Euler(new Vector3(initialAngle.x, initialAngle.y + 180, initialAngle.z)), timeCount* cardFlipSpeed);
@@ -47,13 +47,13 @@ public class CardFlip : MonoBehaviour
                 reset();
             }
         }
-        */
+        
     }
     public void init(int _indexSpriteBePrinted)
     {
         //Debug.Log("start called");
         card_Control = GameObject.Find("DrawCards").GetComponent<Card_Control>();
-        Debug.Log("index : " + _indexSpriteBePrinted);
+        //Debug.Log("index : " + _indexSpriteBePrinted);
         gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite 
             = card_Control.usingCardSprites[_indexSpriteBePrinted].Value;
 
@@ -61,7 +61,8 @@ public class CardFlip : MonoBehaviour
         isFliping = false;
         isCardFaceFront = false;
         isFirstOpen = true;
-        cardFlipSpeed = 1f;
+        letItSpin = false;
+        cardFlipSpeed = 6f;
         timeCount = 0.0f;
         target = null;
     }
@@ -69,22 +70,23 @@ public class CardFlip : MonoBehaviour
     private void reset()
     {
         isFliping = false;
+        letItSpin = false;
         isCardFaceFront = !isCardFaceFront;
         timeCount = 0;
         target = null;
-        Debug.Log(gameObject.name+  "  isCardFaceFront = " + isCardFaceFront);
+        //Debug.Log(gameObject.name+  "  isCardFaceFront = " + isCardFaceFront);
     }
 
     private GameObject GetClickedObject()
     {
-        //Ãæµ¹ÀÌ °¨ÁöµÈ ¿µ¿ª
+        //ì¶©ëŒì´ ê°ì§€ëœ ì˜ì—­
         RaycastHit hit;
         GameObject target = null;
 
-        //¸¶¿ì½º Æ÷ÀÎÆ® ±ÙÃ³ ÁÂÇ¥¸¦ ¸¸µç´Ù.
+        //ë§ˆìš°ìŠ¤ í¬ì¸íŠ¸ ê·¼ì²˜ ì¢Œí‘œë¥¼ ë§Œë“ ë‹¤.
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        //¸¶¿ì½º ±ÙÃ³¿¡ ¿ÀºêÁ§Æ®°¡ ÀÖ´ÂÁö È®ÀÎ
+        //ë§ˆìš°ìŠ¤ ê·¼ì²˜ì— ì˜¤ë¸Œì íŠ¸ê°€ ìˆëŠ”ì§€ í™•ì¸
         if (true == (Physics.Raycast(ray.origin, ray.direction * 10, out hit)))
         {
             target = hit.collider.gameObject;
@@ -93,23 +95,9 @@ public class CardFlip : MonoBehaviour
         return target;
     }
     
-    // control¿¡¼­ ÀÌ ÇÔ¼ö¸¦ È£Ãâ ½Ã Ä«µå¸¦ 180µµ È¸Àü
+    // controlì—ì„œ ì´ í•¨ìˆ˜ë¥¼ í˜¸ì¶œ ì‹œ ì¹´ë“œë¥¼ 180ë„ íšŒì „
     public void flipCard()
     {
-        while(target != null)
-        {
-            timeCount += Time.deltaTime;
-            // Debug.Log("shot");
-            if (timeCount <= 1)
-            {
-                target.transform.rotation = Quaternion.Lerp(Quaternion.Euler(new Vector3(initialAngle.x, initialAngle.y, initialAngle.z)),
-                    Quaternion.Euler(new Vector3(initialAngle.x, initialAngle.y + 180, initialAngle.z)), timeCount * cardFlipSpeed);
-                isFliping = true;
-            }
-            else
-            {
-                reset();
-            }
-        }
+        letItSpin = true;
     }
 }
