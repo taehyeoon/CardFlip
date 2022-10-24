@@ -1379,7 +1379,10 @@ MonoBehaviour:
   horizontalSpacing: 0
   verticalSpacing: 0
   indexSpriteBePrinted: 0
-  centerPos: {x: 0, y: 0, z: 0}
+  preOpenedIndex: 0
+  correctNumber: 0
+  preOpenedObj: {fileID: 0}
+  criteriaPos: {x: 0, y: 0, z: 0}
   basic_Card: {fileID: 8006110857523843345, guid: fbf78c4a298d64d4ca74c1b972d3f754,
     type: 3}
   cardSprites:
@@ -1489,7 +1492,7 @@ Camera:
   far clip plane: 1000
   field of view: 54.88859
   orthographic: 1
-  orthographic size: 14.28
+  orthographic size: 10.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1512,8 +1515,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934652078}
-  m_LocalRotation: {x: 0.008474585, y: -0.007280898, z: -0.00011287475, w: 0.9999376}
-  m_LocalPosition: {x: 30.500517, y: 14.624234, z: -21.269463}
+  m_LocalRotation: {x: -0.0140003525, y: 0.004722037, z: -0.00007209442, w: -0.99989086}
+  m_LocalPosition: {x: 42.758743, y: 21.135756, z: -20.977606}
   m_LocalScale: {x: 1, y: 1, z: 5.5687885}
   m_ConstrainProportionsScale: 0
   m_Children: []

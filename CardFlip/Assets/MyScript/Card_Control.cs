@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Card_Control : MonoBehaviour
@@ -8,19 +9,27 @@ public class Card_Control : MonoBehaviour
     public int horizontalSpacing;
     public int verticalSpacing;
     public int indexSpriteBePrinted; // 각 카드에 출력할 Sprite 인덱스
-    public Vector3 centerPos; // 2차원 카드를 출력할 중심 좌표
+    public int preOpenedIndex; // 이전에 오픈된 카드의 인덱스
+    public int correctNumber; // 맞춘 카드의 수
+    public CardFlip preOpenedObj;
+    public CardFlip NowOpenedObj;
+    public Vector3 criteriaPos; // 2차원 카드를 출력할 좌하단 좌표
     public GameObject basic_Card; // 카드 prefab
     public List<List<GameObject>> Cards; // 각 카드의 object 2차원 리스트
     public List<Sprite> cardSprites; // 전체 Sprite 리스트, 유니티 창에서 초기화
     public List<KeyValuePair<int, Sprite>> usingCardSprites; // 게임에서 사용할 sprite의 리스트
-    //public GameObject card_Flip; // cardFlip Script
+    bool isPlayMode = true;
     void Start()
     {
         cardNumberOfSingleline = 6;
         horizontalSpacing = 3;
         verticalSpacing = 3;
         indexSpriteBePrinted = 0;
-        centerPos = new Vector3(35, 13, 0);
+        preOpenedIndex = -1;
+        correctNumber = 0;
+        criteriaPos = new Vector3(35, 13, 0);
+        preOpenedObj = null;
+
         Cards = new List<List<GameObject>>();
 
         // 전체 Sprite에서 사용할 Sprite를 usingCardSprites에 저장
@@ -43,15 +52,12 @@ public class Card_Control : MonoBehaviour
         {
             for (int j = 0; j < cardNumberOfSingleline; j++)
             {
-                //////사실 짝수*짝수의 형태여서 정 가운데에는 카드가 없음 thisCardPos는 다시 설정해야함
-                //Debug.Log(iter++);
-                Vector3 thisCardPos = centerPos + new Vector3((j - 2) * horizontalSpacing, (i - 2) * verticalSpacing, 0);
+                Vector3 thisCardPos = criteriaPos + new Vector3(j * horizontalSpacing, i * verticalSpacing, 0);
                 Cards[i][j] = Instantiate(basic_Card, thisCardPos, Quaternion.identity);
                 Cards[i][j].AddComponent<CardFlip>();
                 Cards[i][j].GetComponent<CardFlip>().init(indexSpriteBePrinted++);
             }
         }
-        //GameObject.Find(Cards[0][0].name).GetComponent<CardFlip>().cardFaceFront;
     }
 
     void Update()
@@ -105,31 +111,63 @@ public class Card_Control : MonoBehaviour
     
     public void report(int spriteIndex, GameObject go)
     {
-        CardFlip cf = go.GetComponent<CardFlip>();
+        NowOpenedObj = go.GetComponent<CardFlip>();
         //if 이미 오픈되어 있는 카드라면, 해당 입력 무시
-        if (cf.isCardFaceFront)
+        if (NowOpenedObj.isCardFaceFront)
         {
             return;
         }
-        else
+
+        //if 첫번째 open이면 해당 인덱스 번호를 첫번째 open으로 저장
+        if (preOpenedIndex == -1)
         {
-            cf.flipCard();
+            // 카드 open
+            NowOpenedObj.flipCard(false);
+            // 카드 정보 저장
+            preOpenedIndex = NowOpenedObj.spriteIndex;
+            preOpenedObj = NowOpenedObj;
+            return;
         }
         
-        //if 첫번째 open이면 해당 인덱스 번호를 첫번째 open으로 저장
-        
         //if 두번째 open이면 첫번째 open 카드와 현재 카드 그림을 비교
-
             //if 다른 그림이면 현재 카드 오픈 하고 0.5초 대기 후 첫번째, 두번째 카드 모두 close
+        if(preOpenedIndex != NowOpenedObj.spriteIndex)
+        {
+            isPlayMode = false;
+            Debug.Log("pre : " + preOpenedIndex + " present : " + NowOpenedObj.spriteIndex);
+            NowOpenedObj.flipCard(false);
 
+            Invoke("BackCard", 1f);
+        }
             //if 같은 그림이면 현재 카드 open && 맞춘카드 숫자 += 2
-
+        else
+        {
+            Debug.Log("pre : " + preOpenedIndex + " present : " + NowOpenedObj.spriteIndex);
+            NowOpenedObj.flipCard(false);
+            preOpenedIndex = -1;
+            preOpenedObj = null;
+            correctNumber += 2;
                 //if 맞춘 카드 숫자가 전체 카드수와 같다면 게임 종료
-
-                //if 맞춘 카드 숫자와 전체 카드수가 다르다면 아무 동작 안함
-
-
+            if(correctNumber == cardNumberOfSingleline* cardNumberOfSingleline)
+            {
+                Debug.Log("Success!!");
+            }
+        }
         return;
+    }
+    public void BackCard() {
+        NowOpenedObj.flipCard(false);
+        preOpenedObj.flipCard(true);
+        preOpenedIndex = -1;
+        preOpenedObj = null;
+    }
+    public void SetPlayMode(bool state)
+    {
+        isPlayMode = state;
+    }
+    public bool GetisPlayMode()
+    {
+        return isPlayMode;
     }
     
 }
