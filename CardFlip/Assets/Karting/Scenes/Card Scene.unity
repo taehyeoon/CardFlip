@@ -1418,8 +1418,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e2cb1eeef52166c4db160611e52c2ef4, type: 3}
   - {fileID: 21300000, guid: d515cb7c0f51bcb42bc1bfb9afb55b5c, type: 3}
   - {fileID: 21300000, guid: ca345fb5d6b31a74794c9d98a17b1bf5, type: 3}
-  - {fileID: 21300000, guid: 7fe0ef266cfd35e4d99d5d286bc8ef9f, type: 3}
   - {fileID: 21300000, guid: 5b1d44c96001efe4abf192bffde9fac8, type: 3}
+  - {fileID: 21300000, guid: c4ec50fd128cdcc4ea057f4cdee68bb3, type: 3}
 --- !u!4 &1838425518
 Transform:
   m_ObjectHideFlags: 0

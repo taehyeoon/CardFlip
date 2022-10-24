@@ -51,10 +51,11 @@ public class CardFlip : MonoBehaviour
     {
         //Debug.Log("start called");
         card_Control = GameObject.Find("DrawCards").GetComponent<Card_Control>();
-        gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = card_Control.cardSprites[_indexSpriteBePrinted];
+        Debug.Log("index : " + _indexSpriteBePrinted);
+        gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite 
+            = card_Control.usingCardSprites[_indexSpriteBePrinted].Value;
 
         isFliping = false;
-        //cardFaceFront = false;
         cardFlipSpeed = 6f;
         timeCount = 0.0f;
         target = null;
