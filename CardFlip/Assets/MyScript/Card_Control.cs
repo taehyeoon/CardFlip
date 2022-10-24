@@ -13,7 +13,7 @@ public class Card_Control : MonoBehaviour
     public List<List<GameObject>> Cards; // 각 카드의 object 2차원 리스트
     public List<Sprite> cardSprites; // 전체 Sprite 리스트, 유니티 창에서 초기화
     public List<KeyValuePair<int, Sprite>> usingCardSprites; // 게임에서 사용할 sprite의 리스트
-    
+    //public GameObject card_Flip; // cardFlip Script
     void Start()
     {
         cardNumberOfSingleline = 6;
@@ -50,7 +50,6 @@ public class Card_Control : MonoBehaviour
                 Cards[i][j].AddComponent<CardFlip>();
                 Cards[i][j].GetComponent<CardFlip>().init(indexSpriteBePrinted++);
             }
-
         }
         //GameObject.Find(Cards[0][0].name).GetComponent<CardFlip>().cardFaceFront;
     }
@@ -104,5 +103,36 @@ public class Card_Control : MonoBehaviour
         return result;
     }
     
+    public void report(int spriteIndex, GameObject go)
+    {
+        CardFlip cf = go.GetComponent<CardFlip>();
+        // 카드 180도 회전
+
+
+        //if 이미 오픈되어 있는 카드라면, 해당 입력 무시
+        if (cf.isCardFaceFront)
+        {
+            return;
+        }
+        else
+        {
+            cf.flipCard();
+        }
+        
+        //if 첫번째 open이면 해당 인덱스 번호를 첫번째 open으로 저장
+        
+        //if 두번째 open이면 첫번째 open 카드와 현재 카드 그림을 비교
+
+            //if 다른 그림이면 현재 카드 오픈 하고 0.5초 대기 후 첫번째, 두번째 카드 모두 close
+
+            //if 같은 그림이면 현재 카드 open && 맞춘카드 숫자 += 2
+
+                //if 맞춘 카드 숫자가 전체 카드수와 같다면 게임 종료
+
+                //if 맞춘 카드 숫자와 전체 카드수가 다르다면 아무 동작 안함
+
+
+        return;
+    }
     
 }

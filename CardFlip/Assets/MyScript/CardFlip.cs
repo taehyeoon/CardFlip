@@ -5,7 +5,9 @@ using UnityEngine;
 public class CardFlip : MonoBehaviour
 {
     public bool isFliping;
-    public bool isCardFaceFront; 
+    public bool isCardFaceFront;
+    public bool isFirstOpen;
+    public int spriteIndex;
     public float timeCount;
     public float cardFlipSpeed;
     public Vector3 initialAngle;
@@ -21,16 +23,15 @@ public class CardFlip : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GameObject tempTarget;
-
             // 클릭한 곳이 빈곳이 아님 && 선택한 객체가 gameObject && 회전중이 아닐 때
             if ((tempTarget = GetClickedObject()) != null && tempTarget.Equals(gameObject) && !isFliping)
             {
                 target = tempTarget;
                 initialAngle = target.transform.rotation.eulerAngles;
-                //Debug.Log(target.name);
+                card_Control.report(spriteIndex, gameObject);
             }
         }
-        
+        /*
         if (target != null)
         {
 //            Debug.Log("shot");
@@ -46,6 +47,7 @@ public class CardFlip : MonoBehaviour
                 reset();
             }
         }
+        */
     }
     public void init(int _indexSpriteBePrinted)
     {
@@ -55,9 +57,11 @@ public class CardFlip : MonoBehaviour
         gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite 
             = card_Control.usingCardSprites[_indexSpriteBePrinted].Value;
 
+        spriteIndex = card_Control.usingCardSprites[_indexSpriteBePrinted].Key;
         isFliping = false;
         isCardFaceFront = false;
-        cardFlipSpeed = 6f;
+        isFirstOpen = true;
+        cardFlipSpeed = 1f;
         timeCount = 0.0f;
         target = null;
     }
@@ -88,5 +92,24 @@ public class CardFlip : MonoBehaviour
 
         return target;
     }
-
+    
+    // control에서 이 함수를 호출 시 카드를 180도 회전
+    public void flipCard()
+    {
+        while(target != null)
+        {
+            timeCount += Time.deltaTime;
+            // Debug.Log("shot");
+            if (timeCount <= 1)
+            {
+                target.transform.rotation = Quaternion.Lerp(Quaternion.Euler(new Vector3(initialAngle.x, initialAngle.y, initialAngle.z)),
+                    Quaternion.Euler(new Vector3(initialAngle.x, initialAngle.y + 180, initialAngle.z)), timeCount * cardFlipSpeed);
+                isFliping = true;
+            }
+            else
+            {
+                reset();
+            }
+        }
+    }
 }
