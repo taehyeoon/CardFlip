@@ -5,7 +5,7 @@ using UnityEngine;
 public class CardFlip : MonoBehaviour
 {
     public bool isFliping;
-    //public bool cardFaceFront; 
+    public bool isCardFaceFront; 
     public float timeCount;
     public float cardFlipSpeed;
     public Vector3 initialAngle;
@@ -56,15 +56,19 @@ public class CardFlip : MonoBehaviour
             = card_Control.usingCardSprites[_indexSpriteBePrinted].Value;
 
         isFliping = false;
+        isCardFaceFront = false;
         cardFlipSpeed = 6f;
         timeCount = 0.0f;
         target = null;
     }
+
     private void reset()
     {
         isFliping = false;
+        isCardFaceFront = !isCardFaceFront;
         timeCount = 0;
         target = null;
+        Debug.Log(gameObject.name+  "  isCardFaceFront = " + isCardFaceFront);
     }
 
     private GameObject GetClickedObject()
