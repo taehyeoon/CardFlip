@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class Card_Control : MonoBehaviour
 {
-    public bool isPlayMode = true;
+    public bool isPlayMode = true; // false인 상태에서는 마우스 입력 불가
     public int cardNumberOfSingleline; // 한 줄의 카드 개수
     public int horizontalSpacing;
     public int verticalSpacing;
@@ -21,7 +20,8 @@ public class Card_Control : MonoBehaviour
     public List<KeyValuePair<int, Sprite>> usingCardSprites; // 게임에서 사용할 sprite의 리스트
     void Start()
     {
-        cardNumberOfSingleline = 6;
+        isPlayMode = true;
+        cardNumberOfSingleline = 4;
         horizontalSpacing = 3;
         verticalSpacing = 3;
         indexSpriteBePrinted = 0;
@@ -46,8 +46,7 @@ public class Card_Control : MonoBehaviour
             Cards.Add(templist);
         }
 
-        // 카드 생성 후 Cards에 저장
-        // Cards 스크립트 각 카드에 연결
+        // Create card and connect script
         for (int i = 0; i < cardNumberOfSingleline; i++)
         {
             for (int j = 0; j < cardNumberOfSingleline; j++)
@@ -62,7 +61,6 @@ public class Card_Control : MonoBehaviour
 
     void Update()
     {
-       
     }
 
     /*
@@ -77,30 +75,28 @@ public class Card_Control : MonoBehaviour
     {
         List<KeyValuePair<int, Sprite>> result = new List<KeyValuePair<int, Sprite>>();
 
-        //suffle,Fisher-Yates shuffle 
+        // Suffle,Fisher-Yates shuffle 
         for (int i = ls.Count - 1; i > 0; i--)
         {
             int rnd = UnityEngine.Random.Range(0, i);
-
             Sprite temp = ls[i];
             ls[i] = ls[rnd];
             ls[rnd] = temp;
         }
 
-        // 필요한 쌍의 개수를 제외한 sprite 제거
+        // Remove useless card
         ls.RemoveRange(0, ls.Count - ((cardNumberOfSingleline * cardNumberOfSingleline) / 2));
 
-        // 같은 Sprite를 2개씩 생성
-        for(int i = 0; i < ls.Count; i++)
+        // Doubles list
+        for (int i = 0; i < ls.Count; i++)
         {
             result.Add(new KeyValuePair<int, Sprite>(i, ls[i]));
             result.Add(new KeyValuePair<int, Sprite>(i, ls[i]));
         }
-        // 인덱스와 Sprite쌍을 랜덤하게 배열
+        // Shuffle pair of index and Sprite
         for (int i = result.Count - 1; i > 0; i--)
         {
             int rnd = UnityEngine.Random.Range(0, i);
-
             KeyValuePair<int, Sprite> temp = result[i];
             result[i] = result[rnd];
             result[rnd] = temp;
@@ -112,42 +108,36 @@ public class Card_Control : MonoBehaviour
     public void report(int spriteIndex, GameObject go)
     {
         NowOpenedObj = go.GetComponent<CardFlip>();
-        //if 이미 오픈되어 있는 카드라면, 해당 입력 무시
-        if (NowOpenedObj.isCardFaceFront)
+        // Select opened card
+        if (NowOpenedObj.isCardFaceFront || NowOpenedObj.Equals(preOpenedObj))
         {
             return;
         }
 
-        //if 첫번째 open이면 해당 인덱스 번호를 첫번째 open으로 저장
+        // Select first card
         if (preOpenedIndex == -1)
         {
-            // 카드 open
-            NowOpenedObj.flipCard(true);
-            // 카드 정보 저장
+            NowOpenedObj.flipCard(true,true);
             preOpenedIndex = NowOpenedObj.spriteIndex;
             preOpenedObj = NowOpenedObj;
+
             return;
-        }
-        
-        //if 두번째 open이면 첫번째 open 카드와 현재 카드 그림을 비교
-            //if 다른 그림이면 현재 카드 오픈 하고 0.5초 대기 후 첫번째, 두번째 카드 모두 close
+        }      
+        // Select second card && dismatch
         if(preOpenedIndex != NowOpenedObj.spriteIndex)
         {
-            Debug.Log("pre : " + preOpenedIndex + " present : " + NowOpenedObj.spriteIndex);
             isPlayMode = false;
-            NowOpenedObj.flipCard(false);
+            NowOpenedObj.flipCard(false,true);
 
-            Invoke("BackCard", 3f);
+            Invoke("BackCard", 1.5f);
         }
-            //if 같은 그림이면 현재 카드 open && 맞춘카드 숫자 += 2
+        // Select second card && match
         else
         {
-            Debug.Log("pre : " + preOpenedIndex + " present : " + NowOpenedObj.spriteIndex);
-            NowOpenedObj.flipCard(false);
+            NowOpenedObj.flipCard(false,true);
             preOpenedIndex = -1;
             preOpenedObj = null;
             correctNumber += 2;
-                //if 맞춘 카드 숫자가 전체 카드수와 같다면 게임 종료
             if(correctNumber == cardNumberOfSingleline* cardNumberOfSingleline)
             {
                 Debug.Log("Success!!");
@@ -156,8 +146,8 @@ public class Card_Control : MonoBehaviour
         return;
     }
     public void BackCard() {
-        preOpenedObj.flipCard(false);
-        NowOpenedObj.flipCard(true);
+        preOpenedObj.flipCard(false,false);
+        NowOpenedObj.flipCard(true,false);
         preOpenedIndex = -1;
         preOpenedObj = null;
     }
