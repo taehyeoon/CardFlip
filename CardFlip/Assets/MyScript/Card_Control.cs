@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Card_Control : MonoBehaviour
 {
+    public bool isPlayMode = true;
     public int cardNumberOfSingleline; // 한 줄의 카드 개수
     public int horizontalSpacing;
     public int verticalSpacing;
@@ -18,7 +19,6 @@ public class Card_Control : MonoBehaviour
     public List<List<GameObject>> Cards; // 각 카드의 object 2차원 리스트
     public List<Sprite> cardSprites; // 전체 Sprite 리스트, 유니티 창에서 초기화
     public List<KeyValuePair<int, Sprite>> usingCardSprites; // 게임에서 사용할 sprite의 리스트
-    bool isPlayMode = true;
     void Start()
     {
         cardNumberOfSingleline = 6;
@@ -122,7 +122,7 @@ public class Card_Control : MonoBehaviour
         if (preOpenedIndex == -1)
         {
             // 카드 open
-            NowOpenedObj.flipCard(false);
+            NowOpenedObj.flipCard(true);
             // 카드 정보 저장
             preOpenedIndex = NowOpenedObj.spriteIndex;
             preOpenedObj = NowOpenedObj;
@@ -133,11 +133,11 @@ public class Card_Control : MonoBehaviour
             //if 다른 그림이면 현재 카드 오픈 하고 0.5초 대기 후 첫번째, 두번째 카드 모두 close
         if(preOpenedIndex != NowOpenedObj.spriteIndex)
         {
-            isPlayMode = false;
             Debug.Log("pre : " + preOpenedIndex + " present : " + NowOpenedObj.spriteIndex);
+            isPlayMode = false;
             NowOpenedObj.flipCard(false);
 
-            Invoke("BackCard", 1f);
+            Invoke("BackCard", 3f);
         }
             //if 같은 그림이면 현재 카드 open && 맞춘카드 숫자 += 2
         else
@@ -156,8 +156,8 @@ public class Card_Control : MonoBehaviour
         return;
     }
     public void BackCard() {
-        NowOpenedObj.flipCard(false);
-        preOpenedObj.flipCard(true);
+        preOpenedObj.flipCard(false);
+        NowOpenedObj.flipCard(true);
         preOpenedIndex = -1;
         preOpenedObj = null;
     }

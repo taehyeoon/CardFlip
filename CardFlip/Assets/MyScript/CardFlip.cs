@@ -6,19 +6,16 @@ using UnityEngine;
 public class CardFlip : MonoBehaviour
 {
     public bool isFliping; // 카드가 회전하고 있을 때 true
-    public bool isCardFaceFront; // 카드가 앞면일 때 true
-    //public bool isFirstOpen; // 선택된 카드가 첫번째 open일 때 true
-    public bool letItSpin; // ture가 되는 순간부터 180도 회전 시작
+    public bool isCardFaceFront; // 카드가 앞면일 때 tru
+    public bool isLastCheck = false;
     public int spriteIndex; // 오브젝트에 적용된 스프라이트의 인덱스
     public float timeCount; // 회전되는 시간 카운트
     public float cardFlipSpeed; // 카드 회전 속도
     public Vector3 initialAngle;
     public GameObject target;
     public Card_Control card_Control;
-    bool isLastCheck = false;
     void Start()
     {
-        target = gameObject;
     }
 
     void Update()
@@ -27,62 +24,51 @@ public class CardFlip : MonoBehaviour
         {
             if (card_Control.GetisPlayMode())
             {
-                GameObject tempTarget;
-                // 클릭한 곳이 빈곳이 아님 && 선택한 객체가 gameObject && 회전중이 아닐 때
-                if ((tempTarget = GetClickedObject()) != null && tempTarget.Equals(gameObject) && !isFliping)
+                if (gameObject.Equals(GetClickedObject()))
                 {
-
-                    Debug.Log(target);
-                    initialAngle = target.transform.rotation.eulerAngles;
                     card_Control.report(spriteIndex, gameObject);
                 }
             }
         }
-        //Debug.Log(letItSpin);
-        if (letItSpin)
+
+        if (isFliping)
         {
             if (timeCount <= 1)
             {
-               
                 target.transform.rotation = Quaternion.Lerp(Quaternion.Euler(new Vector3(initialAngle.x, initialAngle.y, initialAngle.z)), 
                     Quaternion.Euler(new Vector3(initialAngle.x, initialAngle.y + 180, initialAngle.z)), timeCount* cardFlipSpeed);
                 timeCount += Time.deltaTime;
-                isFliping = true;
+                //isFliping = true;
             }
             else
             {
-               if(isLastCheck) card_Control.SetPlayMode(true);
+                if (isLastCheck) card_Control.SetPlayMode(true);
                 reset();
             }
         }
         
     }
-    public void init(int _indexSpriteBePrinted)
+    public void init(int indexSpriteBePrinted)
     {
-        //Debug.Log("start called");
         card_Control = GameObject.Find("DrawCards").GetComponent<Card_Control>();
-        //Debug.Log("index : " + _indexSpriteBePrinted);
-        gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite 
-            = card_Control.usingCardSprites[_indexSpriteBePrinted].Value;
 
-        spriteIndex = card_Control.usingCardSprites[_indexSpriteBePrinted].Key;
+        gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite 
+            = card_Control.usingCardSprites[indexSpriteBePrinted].Value;
+        spriteIndex = card_Control.usingCardSprites[indexSpriteBePrinted].Key;
+
         isFliping = false;
         isCardFaceFront = false;
-        // isFirstOpen = true;
-        letItSpin = false;
         cardFlipSpeed = 6f;
         timeCount = 0.0f;
-        target = null;
+        target = gameObject;
     }
 
     private void reset()
     {
         isFliping = false;
-        letItSpin = false;
         isCardFaceFront = !isCardFaceFront;
         timeCount = 0;
         isLastCheck = false;
-        //Debug.Log(gameObject.name+  "  isCardFaceFront = " + isCardFaceFront);
     }
 
     private GameObject GetClickedObject()
@@ -107,8 +93,7 @@ public class CardFlip : MonoBehaviour
     public void flipCard(bool last)
     {
         initialAngle = target.transform.rotation.eulerAngles;
-        letItSpin = true;
         isLastCheck = last;
-
+        isFliping = true;
     }
 }
