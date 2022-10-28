@@ -21,13 +21,14 @@ public class Card_Control : MonoBehaviour
     void Start()
     {
         isPlayMode = true;
-        cardNumberOfSingleline = 4;
-        horizontalSpacing = 3;
-        verticalSpacing = 3;
+        cardNumberOfSingleline = 6;
+        horizontalSpacing = 2;
+        verticalSpacing = 2;
         indexSpriteBePrinted = 0;
         preOpenedIndex = -1;
         correctNumber = 0;
-        criteriaPos = new Vector3(35, 13, 0);
+        criteriaPos = gameObject.transform.position;
+        Debug.Log(criteriaPos);
         preOpenedObj = null;
 
         Cards = new List<List<GameObject>>();
@@ -51,7 +52,8 @@ public class Card_Control : MonoBehaviour
         {
             for (int j = 0; j < cardNumberOfSingleline; j++)
             {
-                Vector3 thisCardPos = criteriaPos + new Vector3(j * horizontalSpacing, i * verticalSpacing, 0);
+                Vector3 deltaPos = new Vector3((-1*(cardNumberOfSingleline - 1) + 2*j)* horizontalSpacing, ((cardNumberOfSingleline - 1) - 2 * i) * verticalSpacing, 0);
+                Vector3 thisCardPos = criteriaPos + deltaPos;
                 Cards[i][j] = Instantiate(basic_Card, thisCardPos, Quaternion.identity);
                 Cards[i][j].AddComponent<CardFlip>();
                 Cards[i][j].GetComponent<CardFlip>().init(indexSpriteBePrinted++);
