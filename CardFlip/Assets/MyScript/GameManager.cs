@@ -5,30 +5,56 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public bool isPlayMode; // false인 상태에서는 마우스 입력 불가
-    public ScoreManager scoremanager;
+    public ScoreManager scoreManager;
+    public TimeManager timeManager;
     void Start()
     {
         isPlayMode = true;
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
     }
 
     
     void Update()
     {
-        
+        isGameEnd();
     }
 
     public void reportFlipResult(bool iscorrect)
     {
         if (iscorrect)
         {
-            scoremanager.AddScore(10);
+            scoreManager.AddScore(10);
         }
         else
         {
-            scoremanager.SubstractScore(10);
+            scoreManager.SubstractScore(10);
         }
+
+
         // score가 0에 도달하면 마우스 클릭 차단, 타이머 정지, 종료화면 출력
         
+    }
+
+    public bool isGameEnd()
+    {
+        if(scoreManager.getScore() == 0)
+        {
+            Debug.Log("end");
+            return true;
+        }
+
+        if(timeManager.getTime() == 0.0)
+        {
+            Debug.Log("end");
+            return true;
+        }
+
+        //if(Card_Control.)
+        // 모든 카드를 다 찾았다면 종료
+        // if()
+
+        return false;
     }
 
     public void SetPlayMode(bool state)

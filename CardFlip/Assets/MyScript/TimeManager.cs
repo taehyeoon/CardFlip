@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI; // for Text
 
 
-public class Timer : MonoBehaviour
+public class TimeManager : MonoBehaviour
 {
     public float LimitTime;
     public Text text_Timer;
@@ -26,8 +26,14 @@ public class Timer : MonoBehaviour
         else
         {
             text_Timer.text = "½Ã°£ : 0";
+            LimitTime = 0;
         }
         
 
+    }
+
+    public float getTime()
+    {
+        return LimitTime;
     }
 }

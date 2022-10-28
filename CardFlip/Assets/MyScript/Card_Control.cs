@@ -9,7 +9,7 @@ public class Card_Control : MonoBehaviour
     public int verticalSpacing;
     public int indexSpriteBePrinted; // 각 카드에 출력할 Sprite 인덱스
     public int preOpenedIndex; // 이전에 오픈된 카드의 인덱스
-    public int correctNumber; // 맞춘 카드의 수
+    public int findCardNum; // 맞춘 카드의 수
     public CardFlip preOpenedObj;
     public CardFlip NowOpenedObj;
     public Vector3 centerPos; // 2차원 카드를 출력할 좌하단 좌표
@@ -27,7 +27,7 @@ public class Card_Control : MonoBehaviour
         verticalSpacing = 2;
         indexSpriteBePrinted = 0;
         preOpenedIndex = -1;
-        correctNumber = 0;
+        findCardNum = 0;
         centerPos = gameObject.transform.position;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
@@ -142,8 +142,8 @@ public class Card_Control : MonoBehaviour
             GameObject.Find("GameManager").GetComponent<GameManager>().reportFlipResult(true);
             preOpenedIndex = -1;
             preOpenedObj = null;
-            correctNumber += 2;
-            if(correctNumber == cardNumberOfSingleline* cardNumberOfSingleline)
+            findCardNum += 2;
+            if(findCardNum == cardNumberOfSingleline* cardNumberOfSingleline)
             {
                 Debug.Log("Success!!");
             }
@@ -157,5 +157,10 @@ public class Card_Control : MonoBehaviour
         preOpenedObj = null;
     }
 
-    
+    public int getFindCardNum()
+    {
+        return findCardNum;
+    }
+
+
 }
