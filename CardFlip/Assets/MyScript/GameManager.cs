@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public bool isPlayMode; // false인 상태에서는 마우스 입력 불가
     public ScoreManager scoremanager;
     void Start()
     {
-        //scoremanager = GameObject.Find("SocreManager").GetComponent<ScoreManager>();
+        isPlayMode = true;
     }
 
     
@@ -26,7 +27,16 @@ public class GameManager : MonoBehaviour
         {
             scoremanager.SubstractScore(10);
         }
+        // score가 0에 도달하면 마우스 클릭 차단, 타이머 정지, 종료화면 출력
+        
     }
 
-
+    public void SetPlayMode(bool state)
+    {
+        isPlayMode = state;
+    }
+    public bool GetisPlayMode()
+    {
+        return isPlayMode;
+    }
 }

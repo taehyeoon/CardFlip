@@ -13,13 +13,15 @@ public class CardFlip : MonoBehaviour
     public Vector3 initialAngle;
     public GameObject target;
     public Card_Control card_Control;
+    public GameManager gameManager;
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
     {
-        if (card_Control.GetisPlayMode())
+        if (gameManager.GetisPlayMode())
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -49,7 +51,7 @@ public class CardFlip : MonoBehaviour
                 // Accept mouse click
                 if (isLastCheck && !isCardFaceFront)
                 {
-                    card_Control.SetPlayMode(true);
+                    gameManager.SetPlayMode(true);
                 }
                 reset();
             }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Card_Control : MonoBehaviour
 {
-    public bool isPlayMode = true; // false인 상태에서는 마우스 입력 불가
     public int cardNumberOfSingleline; // 한 줄의 카드 개수
     public int horizontalSpacing;
     public int verticalSpacing;
@@ -13,25 +12,24 @@ public class Card_Control : MonoBehaviour
     public int correctNumber; // 맞춘 카드의 수
     public CardFlip preOpenedObj;
     public CardFlip NowOpenedObj;
-    public Vector3 criteriaPos; // 2차원 카드를 출력할 좌하단 좌표
+    public Vector3 centerPos; // 2차원 카드를 출력할 좌하단 좌표
     public GameObject basic_Card; // 카드 prefab
     public List<List<GameObject>> Cards; // 각 카드의 object 2차원 리스트
     public List<Sprite> cardSprites; // 전체 Sprite 리스트, 유니티 창에서 초기화
     public List<KeyValuePair<int, Sprite>> usingCardSprites; // 게임에서 사용할 sprite의 리스트
-
+    public GameManager gameManager;
 
     void Start()
     {
-        isPlayMode = true;
+        preOpenedObj = null;
         cardNumberOfSingleline = 6;
         horizontalSpacing = 2;
         verticalSpacing = 2;
         indexSpriteBePrinted = 0;
         preOpenedIndex = -1;
         correctNumber = 0;
-        criteriaPos = gameObject.transform.position;
-        Debug.Log(criteriaPos);
-        preOpenedObj = null;
+        centerPos = gameObject.transform.position;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         Cards = new List<List<GameObject>>();
 
@@ -55,7 +53,7 @@ public class Card_Control : MonoBehaviour
             for (int j = 0; j < cardNumberOfSingleline; j++)
             {
                 Vector3 deltaPos = new Vector3((-1*(cardNumberOfSingleline - 1) + 2*j)* horizontalSpacing, ((cardNumberOfSingleline - 1) - 2 * i) * verticalSpacing, 0);
-                Vector3 thisCardPos = criteriaPos + deltaPos;
+                Vector3 thisCardPos = centerPos + deltaPos;
                 Cards[i][j] = Instantiate(basic_Card, thisCardPos, Quaternion.identity);
                 Cards[i][j].AddComponent<CardFlip>();
                 Cards[i][j].GetComponent<CardFlip>().init(indexSpriteBePrinted++);
@@ -130,7 +128,8 @@ public class Card_Control : MonoBehaviour
         // Select second card && dismatch
         if(preOpenedIndex != NowOpenedObj.spriteIndex)
         {
-            isPlayMode = false;
+            gameManager.SetPlayMode(false);
+            //isPlayMode = false;
             NowOpenedObj.flipCard(false,true);
             GameObject.Find("GameManager").GetComponent<GameManager>().reportFlipResult(false);
 
@@ -157,13 +156,6 @@ public class Card_Control : MonoBehaviour
         preOpenedIndex = -1;
         preOpenedObj = null;
     }
-    public void SetPlayMode(bool state)
-    {
-        isPlayMode = state;
-    }
-    public bool GetisPlayMode()
-    {
-        return isPlayMode;
-    }
+
     
 }
