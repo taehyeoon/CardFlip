@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public ScoreManager scoremanager;
     void Start()
     {
-        
+        //scoremanager = GameObject.Find("SocreManager").GetComponent<ScoreManager>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         
     }
+
+    public void reportFlipResult(bool iscorrect)
+    {
+        if (iscorrect)
+        {
+            scoremanager.AddScore(10);
+        }
+        else
+        {
+            scoremanager.SubstractScore(10);
+        }
+    }
+
+
 }

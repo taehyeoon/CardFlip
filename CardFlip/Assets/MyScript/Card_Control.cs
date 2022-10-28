@@ -18,6 +18,8 @@ public class Card_Control : MonoBehaviour
     public List<List<GameObject>> Cards; // 각 카드의 object 2차원 리스트
     public List<Sprite> cardSprites; // 전체 Sprite 리스트, 유니티 창에서 초기화
     public List<KeyValuePair<int, Sprite>> usingCardSprites; // 게임에서 사용할 sprite의 리스트
+
+
     void Start()
     {
         isPlayMode = true;
@@ -130,6 +132,7 @@ public class Card_Control : MonoBehaviour
         {
             isPlayMode = false;
             NowOpenedObj.flipCard(false,true);
+            GameObject.Find("GameManager").GetComponent<GameManager>().reportFlipResult(false);
 
             Invoke("BackCard", 1.5f);
         }
@@ -137,6 +140,7 @@ public class Card_Control : MonoBehaviour
         else
         {
             NowOpenedObj.flipCard(false,true);
+            GameObject.Find("GameManager").GetComponent<GameManager>().reportFlipResult(true);
             preOpenedIndex = -1;
             preOpenedObj = null;
             correctNumber += 2;
