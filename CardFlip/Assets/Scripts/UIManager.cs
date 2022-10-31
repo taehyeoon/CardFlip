@@ -1,4 +1,4 @@
-using System.Collections;
+癤퓎sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,14 +73,16 @@ public class UIManager : MonoBehaviour
     }
     public void ShowResultPage(int click, float accuracy, float playingTime, int score)
     {
-        totalClickText.text = "전체 클릭 횟수 : " + click;
-        accuracyText.text = "정확도 : " + string.Format("{0:0.00}", accuracy) + " %";
-        playTimeText.text = "플레이 타임 : " + string.Format("{0:0.0}", playingTime) + " s";
-        totalScoreText.text = "점수 : " + score;
+        totalClickText.text = click.ToString();
+        accuracyText.text = string.Format("{0:0.00}", accuracy) + " %";
+        playTimeText.text = string.Format("{0:0.0}", playingTime) + " s";
+        totalScoreText.text = score.ToString();
 
         inGameCanvas.SetActive(false);
         pauseCanvas.SetActive(false);
         resultCanvas.SetActive(true);
+
+        GameManager.Instance.SetFreeze(true);
     }
 
 

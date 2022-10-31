@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
     public int openCardNum;
     public int clickCount;
     public int cardNumberOfSingleline; // 한 줄의 카드 개수
-    public float time;
+    public float currentTime;
+    public float limitTime;
 
     void Start()
     {
@@ -35,7 +36,8 @@ public class GameManager : MonoBehaviour
         combo = 1;
         cardNumberOfSingleline = 4;
         clickCount = 0;
-        time = 60.0f;
+        limitTime = 60.0f;
+        currentTime = limitTime;
     }
 
     
@@ -47,7 +49,8 @@ public class GameManager : MonoBehaviour
             UpdateUI();
             if (isGameEnd())
             {
-                //
+                float acc = (cardNumberOfSingleline * cardNumberOfSingleline / 2) * 100 / (float)clickCount;
+                UIManager.Instance.ShowResultPage(clickCount, acc, limitTime - currentTime, score);
             }
         }
 
@@ -56,7 +59,7 @@ public class GameManager : MonoBehaviour
     public void UpdateUI()
     {
         UIManager.Instance.UpdateScoreText(score);
-        UIManager.Instance.UpdateTimeText(time);
+        UIManager.Instance.UpdateTimeText(currentTime);
     }
     public void AddScore()
     {
@@ -74,16 +77,15 @@ public class GameManager : MonoBehaviour
     }
     public void ReduceTime()
     {
-        if(time <= 0.0f)
+        if(currentTime <= 0.0f)
         {
-            time = 0.0f;
+            currentTime = 0.0f;
         }
         else
         {
-            time -= Time.deltaTime;
+            currentTime -= Time.deltaTime;
         }
     }
-
     public void ResetCombo()
     {
         combo = 1;
@@ -100,7 +102,7 @@ public class GameManager : MonoBehaviour
     }
     public bool isGameEnd()
     {
-        if(time == 0.0f)
+        if(currentTime == 0.0f)
         {
             return true;
         }
