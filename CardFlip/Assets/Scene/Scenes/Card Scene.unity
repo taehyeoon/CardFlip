@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44402242, g: 0.49316543, b: 0.5722324, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1133122366}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: EventOnclickMenu
         m_Mode: 1
@@ -657,8 +657,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Restart
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 31fa67c137db4455c9387d9078052140, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 31fa67c137db4455c9387d9078052140, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -816,7 +816,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1133122366}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: EventOnclickContinue
         m_Mode: 1
@@ -1006,8 +1006,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Continue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 31fa67c137db4455c9387d9078052140, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 31fa67c137db4455c9387d9078052140, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1139,7 +1139,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b52cd7870797b0c42bcd00e22ed40707, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a815ce836147d4366832254521356edc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1249,7 +1249,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1133122366}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: EventOnclickRestart
         m_Mode: 1
@@ -1484,7 +1484,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1133122366}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: EventOnclickExit
         m_Mode: 1
@@ -1544,7 +1544,6 @@ GameObject:
   m_Component:
   - component: {fileID: 979572412}
   - component: {fileID: 979572411}
-  - component: {fileID: 979572413}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1629,26 +1628,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &979572413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979572410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Version: 1
-  m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
-  m_LightLayerMask: 1
-  m_CustomShadowLayers: 0
-  m_ShadowLayerMask: 1
-  m_LightCookieSize: {x: 1, y: 1}
-  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &988533732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1854,10 +1833,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1047447836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf023bc44fd02684d826c3d2f99978eb, type: 3}
+  m_Script: {fileID: 11500000, guid: b5f3c9345bf2d4e27b9d42e1fe621da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayMode: 1
+  isPlayMode: 0
   freeze: 0
   score: 0
   unitScore: 0
@@ -1965,7 +1944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1110410900
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2174,7 +2153,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1133122364}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315ea4837ad59f3498bcd6237261ec2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 18a068cd34b6e40a5a2f039f4aad24ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nowTimeText: {fileID: 1572201603}
@@ -2716,8 +2695,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Exit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 31fa67c137db4455c9387d9078052140, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 31fa67c137db4455c9387d9078052140, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3002,7 +2981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1838425518}
-  - component: {fileID: 1838425514}
+  - component: {fileID: 1838425519}
   m_Layer: 0
   m_Name: DrawCards
   m_TagString: Untagged
@@ -3010,66 +2989,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1838425514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1838425513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f9920bf5187d994986699154e0aa2f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  n: 0
-  horizontalSpacing: 0
-  verticalSpacing: 0
-  indexSpriteBePrinted: 0
-  preOpenedIndex: 0
-  centerPos: {x: 0, y: 0, z: 0}
-  preOpenedObj: {fileID: 0}
-  NowOpenedObj: {fileID: 0}
-  basic_Card: {fileID: 8006110857523843345, guid: fbf78c4a298d64d4ca74c1b972d3f754,
-    type: 3}
-  cardSprites:
-  - {fileID: 21300000, guid: 3b898afd21355e14ea3c402cb92704de, type: 3}
-  - {fileID: 21300000, guid: 605b7b9fec2fba8468b2c3169e81b490, type: 3}
-  - {fileID: 21300000, guid: 7e138e2a469c5aa43ae8c10a3d7d9408, type: 3}
-  - {fileID: 21300000, guid: f8a378e4767b56b458661c869c61a103, type: 3}
-  - {fileID: 21300000, guid: 65c9f9b4ade4cf04e9ae3ab1a95cf2a8, type: 3}
-  - {fileID: 21300000, guid: 5eb5cb2766fb4e14eaa8c69ccf80e27e, type: 3}
-  - {fileID: 21300000, guid: a5a5a2271e3a493489dcd8309ae82dce, type: 3}
-  - {fileID: 21300000, guid: fc0d06f92da948c4fbbd21c866d11f9a, type: 3}
-  - {fileID: 21300000, guid: 67d631fd3a8136f4f9cae76648f1ad29, type: 3}
-  - {fileID: 21300000, guid: 9b43fea2b5c271e45a8083f87a3370bc, type: 3}
-  - {fileID: 21300000, guid: 9b26915fa0fb9f340adbacc324063d1f, type: 3}
-  - {fileID: 21300000, guid: 2ab25c649a1b1644bbc4a2e710f91d94, type: 3}
-  - {fileID: 21300000, guid: 8bad873317daf134794aaf6382c8c810, type: 3}
-  - {fileID: 21300000, guid: a7dcc35b59e4a444383ebb0104e0cd50, type: 3}
-  - {fileID: 21300000, guid: 689352b5aa5e58b47b5fa2710c97b359, type: 3}
-  - {fileID: 21300000, guid: 21a155ceaaac74c46a7807af834339d2, type: 3}
-  - {fileID: 21300000, guid: e16383f7b954a2c4c814cb460c229e92, type: 3}
-  - {fileID: 21300000, guid: eb2a2e4c1371ab84fad75d936fb4643b, type: 3}
-  - {fileID: 21300000, guid: 0a2e0f887f785444ea4ef295e64dd4a7, type: 3}
-  - {fileID: 21300000, guid: 02ba3b5231165df479a3d6efafe87ac7, type: 3}
-  - {fileID: 21300000, guid: 1628b9495466c7d49a4e9663b6357825, type: 3}
-  - {fileID: 21300000, guid: 66dbb791bb3f4434c976e8c3299f33f7, type: 3}
-  - {fileID: 21300000, guid: c37f91826a2798a4dbf6260555b16675, type: 3}
-  - {fileID: 21300000, guid: d05dc4d484984a24aad10cca1a23a4f4, type: 3}
-  - {fileID: 21300000, guid: 0ffc4a737da33f840aced1fd3ee4417c, type: 3}
-  - {fileID: 21300000, guid: c0c30ca1e2fe3864697b907d40d2bbc3, type: 3}
-  - {fileID: 21300000, guid: f9ad1fbc3f806d9499ddd6ea252fee7e, type: 3}
-  - {fileID: 21300000, guid: 40ed2d4eabff37940a7b2d8f64d79169, type: 3}
-  - {fileID: 21300000, guid: 5380a67ee7eedbb41aba768bb89be8fe, type: 3}
-  - {fileID: 21300000, guid: 05ce2aeece6a17e478d1f8f99c20988f, type: 3}
-  - {fileID: 21300000, guid: fce2c6bebd774b8499fa16a638a876fb, type: 3}
-  - {fileID: 21300000, guid: 77fc0b5c6b9d59d4d938d8bf89eaab2d, type: 3}
-  - {fileID: 21300000, guid: e2cb1eeef52166c4db160611e52c2ef4, type: 3}
-  - {fileID: 21300000, guid: d515cb7c0f51bcb42bc1bfb9afb55b5c, type: 3}
-  - {fileID: 21300000, guid: ca345fb5d6b31a74794c9d98a17b1bf5, type: 3}
-  - {fileID: 21300000, guid: 5b1d44c96001efe4abf192bffde9fac8, type: 3}
-  - {fileID: 21300000, guid: c4ec50fd128cdcc4ea057f4cdee68bb3, type: 3}
 --- !u!4 &1838425518
 Transform:
   m_ObjectHideFlags: 0
@@ -3085,6 +3004,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1838425519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838425513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294b85c3feb4443009334a85411419f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  n: 0
+  horizontalSpacing: 0
+  verticalSpacing: 0
+  indexSpriteBePrinted: 0
+  preOpenedIndex: 0
+  centerPos: {x: 0, y: 0, z: 0}
+  preOpenedObj: {fileID: 0}
+  NowOpenedObj: {fileID: 0}
+  basic_Card: {fileID: 8006110857523843345, guid: be73590bb151b42fcb7346445bb5a39a,
+    type: 3}
+  cardSprites:
+  - {fileID: 21300000, guid: 57f02bbab72af4e38a4ae17e967eddf6, type: 3}
+  - {fileID: 21300000, guid: ff3c67caf3ab9431f82413601d8c57da, type: 3}
+  - {fileID: 21300000, guid: 9b0f4328a68764b60b449c696a2ffffc, type: 3}
+  - {fileID: 21300000, guid: b91d850de90364b4bb67f0893f945419, type: 3}
+  - {fileID: 21300000, guid: bd4e5940e0d9642d0b2c3b464a95e2a8, type: 3}
+  - {fileID: 21300000, guid: a2d6ea21dee1a4c33a1bc75bd4b76639, type: 3}
+  - {fileID: 21300000, guid: eb7de63d85cbf453eba4da2dea2a0713, type: 3}
+  - {fileID: 21300000, guid: 7d948b58fa2464551b89cd4409cec427, type: 3}
+  - {fileID: 21300000, guid: 7be5c7cb9b2fd40488b7be63ac46641e, type: 3}
+  - {fileID: 21300000, guid: da855fd6cd8ff4a69914b9cb8cd4367e, type: 3}
+  - {fileID: 21300000, guid: 5706c8005874f470baf7f0f8c99473c6, type: 3}
+  - {fileID: 21300000, guid: 0f328498813e94c2bb4970f7ddc96f3f, type: 3}
+  - {fileID: 21300000, guid: e517621eff34448e3b38fd20ae7e70e0, type: 3}
+  - {fileID: 21300000, guid: c6c6ec7aad72d4bd2ad3487e1c4ba42b, type: 3}
+  - {fileID: 21300000, guid: 8cf878a6745f94485b8ddfcac15ebdc8, type: 3}
+  - {fileID: 21300000, guid: 0573a9a1725194f7f82f3f7c1e2dc49a, type: 3}
+  - {fileID: 21300000, guid: 14e27e0846343476587d5b08f84e6a46, type: 3}
+  - {fileID: 21300000, guid: 225bfe357f3924d148e0a6162961337d, type: 3}
+  - {fileID: 21300000, guid: b4882bfc06ac045479c7da7ebe7f3232, type: 3}
+  - {fileID: 21300000, guid: ccae572e1b5df4d958f0fcfd6135c9a6, type: 3}
+  - {fileID: 21300000, guid: 25c80cebdd1ed4005a078e6d3256defb, type: 3}
+  - {fileID: 21300000, guid: e7076a021fd8b4888b6b57ff3d01db72, type: 3}
+  - {fileID: 21300000, guid: 43cac5af6475f4e61b727600313b225b, type: 3}
+  - {fileID: 21300000, guid: c9ac8aace68dc4e4ba11f9de58f949b7, type: 3}
+  - {fileID: 21300000, guid: e11c99b38144e4c11a729f1f5e42885c, type: 3}
+  - {fileID: 21300000, guid: 50f83270f326c4f82838e8d93d40b30c, type: 3}
+  - {fileID: 21300000, guid: 51799fd36a71b4c7586047c1ebcaad2a, type: 3}
+  - {fileID: 21300000, guid: c37587cd67c354d3085fbc2ab58ef17b, type: 3}
+  - {fileID: 21300000, guid: 5a02230b4ced2425abfc883c2dff7232, type: 3}
+  - {fileID: 21300000, guid: f76e3df152e5e40d0baab2d4a4756dda, type: 3}
+  - {fileID: 21300000, guid: 99c3cb262052d4ab89598befff3408d5, type: 3}
+  - {fileID: 21300000, guid: ff58727d7a8bb4dd3bad59765f177b55, type: 3}
+  - {fileID: 21300000, guid: e2e4e88c1c75542b1b1e04f3c417e066, type: 3}
+  - {fileID: 21300000, guid: 6562e25ee6d074477b24d6504d13b2b8, type: 3}
+  - {fileID: 21300000, guid: f0857aee1e6ff4c0da605dd32080ad71, type: 3}
+  - {fileID: 21300000, guid: 9a235b7c16aa54d6bac9eaddc5fcf34e, type: 3}
+  - {fileID: 21300000, guid: 337682205b98c43e7a92591a98faede2, type: 3}
+  - {fileID: 21300000, guid: 6a0403c00e1224164910d63df5ad4cae, type: 3}
 --- !u!1 &1902024313
 GameObject:
   m_ObjectHideFlags: 0
@@ -3178,7 +3158,6 @@ GameObject:
   - component: {fileID: 1934652081}
   - component: {fileID: 1934652080}
   - component: {fileID: 1934652079}
-  - component: {fileID: 1934652082}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3252,39 +3231,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 16.877, y: 84.83, z: 0}
---- !u!114 &1934652082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934652078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
 --- !u!1 &1991559625
 GameObject:
   m_ObjectHideFlags: 0
@@ -3606,7 +3552,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1133122366}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: EventOnclickExit
         m_Mode: 1

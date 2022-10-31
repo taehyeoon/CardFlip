@@ -41,7 +41,9 @@ public class Card_Control : MonoBehaviour
     public void Init()
     {
         preOpenedObj = null;
-        n = GameManager.Instance.GetCardNumberOfSingleline();
+        Debug.Log(GameManager.Instance);
+        n = 4;
+        Debug.Log(n);
         horizontalSpacing = 2;
         verticalSpacing = 2;
         indexSpriteBePrinted = 0;
