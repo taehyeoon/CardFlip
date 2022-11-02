@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     public GameObject pauseCanvas;
     public GameObject resultCanvas;
 
+    public Button btnMenu;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
         {
             instance = this;
         }
+
         inGameCanvas.SetActive(true);
         pauseCanvas.SetActive(false);
         resultCanvas.SetActive(false);
@@ -49,22 +51,35 @@ public class UIManager : MonoBehaviour
     }
     public void EventOnclickMenu()
     {
-        inGameCanvas.SetActive(false);
+        btnMenu.interactable = false;
+
+        inGameCanvas.SetActive(true);
         resultCanvas.SetActive(false);
         pauseCanvas.SetActive(true);
+
+        GameManager.Instance.SetisPlayMode(false);
         GameManager.Instance.SetFreeze(true);
     }
     public void EventOnclickContinue()
     {
+        btnMenu.interactable = true;
+
+
         inGameCanvas.SetActive(true);
-        resultCanvas.SetActive(true);
+        resultCanvas.SetActive(false);
         pauseCanvas.SetActive(false);
+
+        GameManager.Instance.SetisPlayMode(true);
         GameManager.Instance.SetFreeze(false);
     }
     public void EventOnclickRestart()
     {
-        pauseCanvas.SetActive(false);
+        btnMenu.interactable = true;
+
         inGameCanvas.SetActive(true);
+        resultCanvas.SetActive(false);
+        pauseCanvas.SetActive(false);
+
         GameManager.Instance.ResetGame();
     }
     public void EventOnclickExit()

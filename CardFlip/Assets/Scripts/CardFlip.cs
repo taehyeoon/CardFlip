@@ -6,22 +6,21 @@ public class CardFlip : MonoBehaviour
 {
     public bool isFliping; // 카드가 회전하고 있을 때 true
     public bool isCardFaceFront; // 카드가 앞면일 때 true
-    public bool isLastCheck = false;
+    public bool isLastCheck;
     public int spriteIndex; // 오브젝트에 적용된 스프라이트의 인덱스
     public float timeCount; // 회전되는 시간 카운트
     public float cardFlipSpeed; // 카드 회전 속도
     public Vector3 initialAngle;
     public GameObject target;
     public Card_Control card_Control;
-    public GameManager gameManager;
+    
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
     {
-        if (gameManager.GetisPlayMode())
+        if (GameManager.Instance.GetisPlayMode())
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -45,7 +44,7 @@ public class CardFlip : MonoBehaviour
                 // Accept mouse click
                 if (isLastCheck && !isCardFaceFront)
                 {
-                    gameManager.SetPlayMode(true);
+                    GameManager.Instance.SetisPlayMode(true);
                 }
                 reset();
             }
@@ -64,6 +63,7 @@ public class CardFlip : MonoBehaviour
 
         isFliping = false;
         isCardFaceFront = false;
+        isLastCheck = false;
         cardFlipSpeed = 6f;
         timeCount = 0.0f;
         target = gameObject;

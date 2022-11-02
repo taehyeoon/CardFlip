@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return instance; } }
 
     public bool isPlayMode; // false인 상태에서는 마우스 입력 불가
-    public bool freeze;
+    public bool freeze; // time freeze
     public int score;
     public int unitScore;
     public int combo;
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         combo = 1;
         cardNumberOfSingleline = 4;
         clickCount = 0;
-        limitTime = 60.0f;
+        limitTime = 5.0f;
         currentTime = limitTime;
     }
 
@@ -47,9 +47,9 @@ public class GameManager : MonoBehaviour
         {
             ReduceTime();
             UpdateUI();
-            if (isGameEnd())
+            if (IsGameEnd())
             {
-                float acc = (cardNumberOfSingleline * cardNumberOfSingleline / 2) * 100 / (float)clickCount;
+                float acc = (openCardNum / 2) * 100 / (float)clickCount;
                 UIManager.Instance.ShowResultPage(clickCount, acc, limitTime - currentTime, score);
             }
         }
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
     {
         freeze = value;
     }
-    public bool isGameEnd()
+    public bool IsGameEnd()
     {
         if(currentTime == 0.0f)
         {
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public void SetPlayMode(bool state)
+    public void SetisPlayMode(bool state)
     {
         isPlayMode = state;
     }

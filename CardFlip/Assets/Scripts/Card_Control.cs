@@ -160,8 +160,8 @@ public class Card_Control : MonoBehaviour
         // Select second card && dismatch
         if(preOpenedIndex != NowOpenedObj.spriteIndex)
         {
-            GameManager.Instance.SetPlayMode(false);
             NowOpenedObj.flipCard(false,true);
+            GameManager.Instance.SetisPlayMode(false);
             GameManager.Instance.ResetCombo();
             GameManager.Instance.PlusClickCount();
             Invoke("BackCard", 1.5f);
