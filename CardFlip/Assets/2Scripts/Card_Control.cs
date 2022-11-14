@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq; // toList()
+using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
+using System.Threading;
+using UnityEditor.Build;
 
 public class Card_Control : MonoBehaviour
 {
@@ -31,12 +35,7 @@ public class Card_Control : MonoBehaviour
         {
             instance = this;
         }
-        Init();
-    }
-
-    public void Test()
-    {
-        Debug.Log("TEST");
+        // Init();
     }
     public void Init()
     {
@@ -184,5 +183,42 @@ public class Card_Control : MonoBehaviour
         NowOpenedObj.flipCard(true,false);
         preOpenedIndex = -1;
         preOpenedObj = null;
+    }   
+
+    
+    
+    
+    
+    
+    
+    
+    
+    // 처음에 앞면이였다가 차례로 뒤집힘
+    public void ShowCards()
+    {
+        // bool[,] flipEnd = new bool[n, n];
+
+        // Set Card front
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                Cards[i][j].GetComponent<Transform>().rotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
+
+        float start_time = 0;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                Vector3 initAngle = Cards[i][j].transform.rotation.eulerAngles;
+                //Debug.Log(Cards[i][j]);
+                StartCoroutine(CardFlip.Instance.FlipOnce(/*flipEnd, */Cards[i][j], i, j, start_time));
+                start_time += 0.2f;
+            }
+        }
     }
+
+
 }

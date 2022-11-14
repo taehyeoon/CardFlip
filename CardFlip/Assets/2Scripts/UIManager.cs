@@ -37,9 +37,9 @@ public class UIManager : MonoBehaviour
             instance = this;
         }
         ColorTime_code = "#db2b1f";
-        inGameCanvas.SetActive(true);
+/*        inGameCanvas.SetActive(true);
         pauseCanvas.SetActive(false);
-        resultCanvas.SetActive(false);
+        resultCanvas.SetActive(false);*/
     }
 
 

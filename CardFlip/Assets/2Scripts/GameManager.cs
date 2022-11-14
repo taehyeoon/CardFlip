@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -30,6 +32,8 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
         Init();
+        EventManager.Instance.showOnlyStartCanvas();
+
     }
     public void Init()
     {
@@ -44,8 +48,11 @@ public class GameManager : MonoBehaviour
         limitTime = 60.0f;
         currentTime = limitTime;
     }
+    public void Teststart()
+    {
+        Card_Control.Instance.ShowCards();
 
-    
+    }
     void Update()
     {
         if (!freeze)
@@ -111,29 +118,20 @@ public class GameManager : MonoBehaviour
     public void IsGameEnd()
     {
         float acc;
+
         if (currentTime == 0.0f)
         {
-            if (clickCount == 0)
-            {
-                acc = 0.0f;
-            }
-            else
-            {
-                acc = (openCardNum / 2) * 100 / (float)clickCount;
-            }
+            if (clickCount == 0) acc = 0.0f;
+            else acc = (openCardNum / 2) * 100 / (float)clickCount;
+
             UIManager.Instance.ShowResultPage(clickCount, acc, limitTime - currentTime, score, "TIMEOUT");
             SetFreeze(true);
         } 
         else if (openCardNum == cardNumberOfSingleline * cardNumberOfSingleline)
         {
-            if (clickCount == 0)
-            {
-                acc = 0.0f;
-            }
-            else
-            {
-                acc = (openCardNum / 2) * 100 / (float)clickCount;
-            }
+            if (clickCount == 0) acc = 0.0f;
+            else acc = (openCardNum / 2) * 100 / (float)clickCount;
+
             UIManager.Instance.ShowResultPage(clickCount, acc, limitTime - currentTime, score, "SUCCESS");
 
             SetFreeze(true);
